@@ -1,0 +1,22 @@
+<resources>
+    <!-- Titles -->
+    <string name="app_name">Trail Angel</string>
+    <string name="title_trails">Trails</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_settings">Settings</string>
+    <!-- Common -->
+    <string name="common_name">Name:</string>
+    <string name="common_phone">Phone Number:</string>
+    <string name="common_emergency">Emergency Contacts:</string>
+    <string name="common_edit">Edit</string>
+    <string name="common_add_contact">Add Contact</string>
+    <string name="common_trail_name">Trail Name</string>
+    <!-- Trails -->
+    <string name="trails_parks">Parks</string>
+    <string name="trails_parks_desc">Select a park to see its trails.</string>
+    <!-- Schedule -->
+
+    <!-- Settings -->
+    <string name="settings_change_trail_name">Change Trail Name</string>
+    <string name="settings_logout">Logout</string>
+</resources>
