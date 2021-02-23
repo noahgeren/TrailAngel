@@ -2,6 +2,7 @@ package com.noahgeren.trailangel.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import com.noahgeren.trailangel.services.VerificationService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	
+
 	@Autowired
 	JWTAuthentication authentication;
 	
@@ -59,7 +60,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/info")
-	public User getUserInfo(final Principal principal) {
+	public User getUserInfo(final Principal principal, final TimeZone timezone) {
+		System.out.println(timezone);
 		return userService.findUser(principal.getName());
 	}
 

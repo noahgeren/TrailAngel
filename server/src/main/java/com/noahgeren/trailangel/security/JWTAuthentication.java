@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +14,7 @@ import com.noahgeren.trailangel.domain.User;
 @Component
 public class JWTAuthentication {
 	
-	private static final int EXPIRATION_DAYS = 10;
+	private static final int EXPIRATION_DAYS = 15;
 
 	@Value("${jwt.secretkey}")
 	private String secretKey;
