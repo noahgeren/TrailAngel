@@ -1,22 +1,28 @@
 package com.noahgeren.trailangel.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.noahgeren.trailangel.dao.UserRepository;
+import com.noahgeren.trailangel.domain.User;
 
 @Service
-public class UserService implements UserDetailsService{
+public class UserService{
 	
 	@Autowired
 	private UserRepository userRepo;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return userRepo.findById(username).orElseThrow(() -> new UsernameNotFoundException(username));
+	public User findUser(String phoneNumber) {
+		return userRepo.findById(phoneNumber).orElse(null);
 	}
-
+	
+	public User createUser(String phoneNumber) {
+		return userRepo.save(new User(phoneNumber));
+	}
+	
+	public User saveUser(User user) {
+		if(user == null || user.getPhoneNumber() == null) return null;
+		return userRepo.save(user);
+	}
+	
 }
