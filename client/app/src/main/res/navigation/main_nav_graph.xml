@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/navigation_parks">
+
+    <fragment
+        android:id="@+id/navigation_parks"
+        android:name="com.noahgeren.trailangel.ui.trails.ParksFragment"
+        android:label="@string/trails"
+        tools:layout="@layout/fragment_parks" >
+        <action
+            android:id="@+id/action_parks_to_trails"
+            app:destination="@id/navigation_trails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="com.noahgeren.trailangel.ui.schedule.ScheduleFragment"
+        android:label="@string/schedule"
+        tools:layout="@layout/fragment_schedule" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.noahgeren.trailangel.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_trails"
+        android:name="com.noahgeren.trailangel.ui.trails.TrailsFragment"
+        android:label="@string/trails"
+        tools:layout="@layout/fragment_trails" />
+</navigation>

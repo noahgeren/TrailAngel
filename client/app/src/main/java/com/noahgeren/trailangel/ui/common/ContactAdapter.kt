@@ -11,22 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noahgeren.trailangel.R
 import com.noahgeren.trailangel.models.Contact
 
-class EmergencyContactAdapter(private val context: Context?, private val contacts: LiveData<MutableList<Contact>>, private val contactModel: ContactModel) : RecyclerView.Adapter<EmergencyContactViewHolder>() {
-
-    init {
-        contacts.observeForever {
-            notifyDataSetChanged()
-        }
-    }
+class ContactAdapter(private val context: Context?, private val contacts: LiveData<MutableList<Contact>>, private val contactViewModel: ContactViewModel) : RecyclerView.Adapter<EmergencyContactViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmergencyContactViewHolder {
-        return EmergencyContactViewHolder(LayoutInflater.from(context).inflate(R.layout.emergency_contact_row, parent, false))
+        return EmergencyContactViewHolder(LayoutInflater.from(context).inflate(R.layout.row_contact, parent, false))
     }
 
     override fun onBindViewHolder(holder: EmergencyContactViewHolder, position: Int) {
         holder.name.text = contacts.value?.get(position)?.name ?: "Error"
         holder.edit.setOnClickListener {
-            contactModel.removeContactAt(position)
+            contactViewModel.removeContactAt(position)
         }
     }
 
@@ -38,8 +32,7 @@ class EmergencyContactAdapter(private val context: Context?, private val contact
 
 class EmergencyContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    var name: TextView = itemView.findViewById(R.id.emergency_contact_name)
-    var edit: Button = itemView.findViewById(R.id.emergency_contact_edit)
+    var name: TextView = itemView.findViewById(R.id.contact_name)
+    var edit: Button = itemView.findViewById(R.id.contact_edit)
 
 }
-

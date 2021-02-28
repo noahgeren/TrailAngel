@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.noahgeren.trailangel.models.Contact
-import com.noahgeren.trailangel.ui.common.ContactModel
+import com.noahgeren.trailangel.ui.common.ContactViewModel
 
-class SettingsViewModel : ViewModel(), ContactModel {
+class SettingsViewModel : ViewModel(), ContactViewModel {
 
     private val name by lazy {
         MutableLiveData("Noah Geren")
@@ -18,7 +18,7 @@ class SettingsViewModel : ViewModel(), ContactModel {
 
     private val contacts by lazy {
         MutableLiveData(mutableListOf(
-                Contact("Test Tester", "+1-123-456-7890")
+            Contact("Test Tester", "+1-123-456-7890")
         ))
     }
 

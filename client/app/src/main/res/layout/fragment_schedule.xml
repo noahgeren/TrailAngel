@@ -10,5 +10,7 @@
         android:id="@+id/schedule_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="LinearLayoutManager"/>
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/row_schedule"
+        tools:itemCount="3"/>
 </ScrollView>

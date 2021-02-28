@@ -27,7 +27,8 @@
             android:layout_height="match_parent"
             android:paddingVertical="5dp"
             android:clickable="true"
-            android:background="?android:attr/selectableItemBackground">
+            android:background="?android:attr/selectableItemBackground"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/schedule_start_time"
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
-                app:layout_constraintEnd_toStartOf="@+id/divider"
+                app:layout_constraintEnd_toStartOf="@+id/schedule_divider"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="7:30 AM" />
 
@@ -48,7 +49,7 @@
                 tools:text="14 HR" />
 
             <View
-                android:id="@+id/divider"
+                android:id="@+id/schedule_divider"
                 android:layout_width="2dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="80dp"
@@ -65,7 +66,7 @@
                 tools:text="Half Dome"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/divider"
+                app:layout_constraintStart_toEndOf="@+id/schedule_divider"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

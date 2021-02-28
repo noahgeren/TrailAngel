@@ -1,22 +1,30 @@
 <resources>
-    <!-- Titles -->
     <string name="app_name">Trail Angel</string>
-    <string name="title_trails">Trails</string>
-    <string name="title_schedule">Schedule</string>
-    <string name="title_settings">Settings</string>
-    <!-- Common -->
-    <string name="common_name">Name:</string>
-    <string name="common_phone">Phone Number:</string>
-    <string name="common_emergency">Emergency Contacts:</string>
-    <string name="common_edit">Edit</string>
-    <string name="common_add_contact">Add Contact</string>
-    <string name="common_trail_name">Trail Name</string>
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="enter_code">Enter Verification Code</string>
+    <string name="code">Verification Code</string>
+    <string name="verify">Verify</string>
     <!-- Trails -->
-    <string name="trails_parks">Parks</string>
-    <string name="trails_parks_desc">Select a park to see its trails.</string>
+    <string name="trails">Trails</string>
+    <string name="parks">Parks</string>
+    <string name="parks_desc">Select a park to see its trails.</string>
     <!-- Schedule -->
-
+    <string name="schedule">Schedule</string>
     <!-- Settings -->
-    <string name="settings_change_trail_name">Change Trail Name</string>
-    <string name="settings_logout">Logout</string>
+    <string name="settings">Settings</string>
+    <string name="change_trail_name">Change Trail Name</string>
+    <string name="logout">Logout</string>
+    <!-- Common -->
+    <string name="phone_number">Phone Number</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="trail_name">Trail Name</string>
+    <string name="edit">Edit</string>
+    <!-- Navigation -->
+    <string name="trails_icon">Trails Icon</string>
+    <string name="schedule_icon">Schedule Icon</string>
+    <string name="settings_icon">Settings Icon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

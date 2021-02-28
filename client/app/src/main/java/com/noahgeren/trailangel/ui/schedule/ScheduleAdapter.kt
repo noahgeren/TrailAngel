@@ -11,7 +11,7 @@ import com.noahgeren.trailangel.R
 class ScheduleAdapter(private val context: Context?, private val trails: List<List<String>>) : RecyclerView.Adapter<ScheduleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
-        return ScheduleViewHolder(LayoutInflater.from(context).inflate(R.layout.schedule_row, parent, false))
+        return ScheduleViewHolder(LayoutInflater.from(context).inflate(R.layout.row_schedule, parent, false))
     }
 
     override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
