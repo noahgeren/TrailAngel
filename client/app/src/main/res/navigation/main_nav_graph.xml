@@ -31,5 +31,14 @@
         android:id="@+id/navigation_trails"
         android:name="com.noahgeren.trailangel.ui.trails.TrailsFragment"
         android:label="@string/trails"
-        tools:layout="@layout/fragment_trails" />
+        tools:layout="@layout/fragment_trails" >
+        <action
+            android:id="@+id/action_trails_to_trail_details"
+            app:destination="@id/navigation_trail_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_trail_details"
+        android:name="com.noahgeren.trailangel.ui.trails.TrailDetailsFragment"
+        android:label="@string/testing_label"
+        tools:layout="@layout/fragment_trail_details" />
 </navigation>

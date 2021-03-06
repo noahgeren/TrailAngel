@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 class SharedViewModel: ViewModel() {
 
     companion object {
-        const val PARKS = 0; const val TRAILS = 1
+        const val PARKS = 0
+        const val TRAILS = 1
+        const val TRAIL_DETAILS = 3
     }
 
     var trailsState = PARKS

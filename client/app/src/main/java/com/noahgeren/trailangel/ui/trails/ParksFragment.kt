@@ -18,7 +18,7 @@ class ParksFragment : Fragment(R.layout.fragment_parks) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(sharedViewModel.trailsState == SharedViewModel.TRAILS) {
+        if(sharedViewModel.trailsState != SharedViewModel.PARKS) {
             gotoTrails()
         }
         list = view.findViewById(R.id.parks_recycler_view)
@@ -26,13 +26,13 @@ class ParksFragment : Fragment(R.layout.fragment_parks) {
             "Big Bend", "Canyonlands", "Deathvalley", "Yosemite"
         ), { _: View, position: Int, _: Int ->
             Log.d("ParkFragment", "Clicked park #${position}")
+            sharedViewModel.trailsState = SharedViewModel.TRAILS
             gotoTrails()
         })
         list.adapter = parkAdapter
     }
 
     private fun gotoTrails() {
-        sharedViewModel.trailsState = SharedViewModel.TRAILS
         Navigation.findNavController(requireView()).navigate(R.id.action_parks_to_trails)
     }
 

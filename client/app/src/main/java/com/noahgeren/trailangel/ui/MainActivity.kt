@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         when(navController.currentDestination?.id) {
             R.id.navigation_parks -> finish()
             R.id.navigation_trails -> sharedViewModel.trailsState = SharedViewModel.PARKS
+            R.id.navigation_trail_details -> sharedViewModel.trailsState = SharedViewModel.TRAILS
         }
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
