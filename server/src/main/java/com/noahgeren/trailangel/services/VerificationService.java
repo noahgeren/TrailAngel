@@ -15,6 +15,9 @@ public class VerificationService {
 	@Autowired
 	VerificationRepository verificationRepo;
 	
+	@Autowired
+	TwilioService twilioService;
+	
 	public boolean verify(Verification verification) {
 		if(verification.getPhoneNumber() == null || verification.getCode() == null) {
 			return false;
@@ -27,14 +30,14 @@ public class VerificationService {
 		return false;
 	}
 	
-	public Verification sendVerification(String phoneNumber) {
-		if(phoneNumber == null) { // TODO: Check if valid phone number here
-			return null;
+	public boolean sendVerification(String phoneNumber) {
+		if(phoneNumber == null || !phoneNumber.startsWith("+1")) { // TODO: Check if valid phone number here
+			return false;
 		}
-		Verification v = verificationRepo.save(new Verification(phoneNumber, generateCode()));
-		System.out.println(v.getCode());
-		// TODO: Send code here
-		return v;
+		final Verification v = verificationRepo.save(new Verification(phoneNumber, generateCode()));
+//		System.out.println(v.getCode());
+//		return true;
+		return v != null ? twilioService.sendText(phoneNumber, "Trail Angel Verification Code: " + v.getCode()) : false;
 	}
 	
 	private String generateCode() {

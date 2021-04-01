@@ -1,5 +1,6 @@
 package com.noahgeren.trailangel.ui.settings
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,9 +16,9 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.noahgeren.trailangel.R
 import com.noahgeren.trailangel.models.Contact
-import com.noahgeren.trailangel.repos.UserRepo
 import com.noahgeren.trailangel.ui.MainActivity
 import com.noahgeren.trailangel.ui.common.ContactAdapter
+import com.noahgeren.trailangel.ui.common.PreferenceUtils
 import com.noahgeren.trailangel.ui.common.Utils
 import com.noahgeren.trailangel.ui.login.LoginActivity
 
@@ -67,7 +68,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         logout.setOnClickListener {
             Utils.showAlert(requireContext(), "Logout", "Are you sure you want to logout?", null, "Yes", "No",
                 { _, _ ->
-                    UserRepo.logout()
+                    PreferenceUtils.setToken(null)
                     val intent = Intent(requireContext(), LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     requireActivity().finish()

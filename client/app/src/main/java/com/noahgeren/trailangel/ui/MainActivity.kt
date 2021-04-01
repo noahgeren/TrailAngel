@@ -10,6 +10,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.noahgeren.trailangel.R
+import com.noahgeren.trailangel.database.ParkRepository
+import com.noahgeren.trailangel.database.TrailRepository
 import com.noahgeren.trailangel.ui.common.SharedViewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -27,6 +29,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             R.id.navigation_parks, R.id.navigation_schedule, R.id.navigation_settings))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        ParkRepository.init(this)
+        TrailRepository.init(this)
     }
 
     override fun onBackPressed() {

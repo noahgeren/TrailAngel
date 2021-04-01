@@ -35,10 +35,16 @@
         <action
             android:id="@+id/action_trails_to_trail_details"
             app:destination="@id/navigation_trail_details" />
+        <argument
+            android:name="parkId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/navigation_trail_details"
         android:name="com.noahgeren.trailangel.ui.trails.TrailDetailsFragment"
         android:label="@string/testing_label"
-        tools:layout="@layout/fragment_trail_details" />
+        tools:layout="@layout/fragment_trail_details" >
+        <argument android:name="trailId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

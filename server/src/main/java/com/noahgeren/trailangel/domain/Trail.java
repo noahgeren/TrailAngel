@@ -4,13 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Trail {
 	
@@ -20,8 +19,14 @@ public class Trail {
 	
 	private String name;
 	
-	@JsonIgnore
-	@ManyToOne
-	private Park park;
+	private Double length;
+	
+	private Integer parkId;
+	
+	public Trail(String name, Double length, Integer parkId) {
+		this.name = name;
+		this.length = length;
+		this.parkId = parkId;
+	}
 
 }

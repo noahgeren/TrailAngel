@@ -2,38 +2,71 @@ package com.noahgeren.trailangel.ui.trails
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.noahgeren.trailangel.R
+import com.noahgeren.trailangel.models.Park
+import com.noahgeren.trailangel.ui.common.ListItemSelectedCallback
 import com.noahgeren.trailangel.ui.common.SharedViewModel
+
+private const val TAG = "ParksFragment"
 
 class ParksFragment : Fragment(R.layout.fragment_parks) {
 
     private val sharedViewModel: SharedViewModel by viewModels({ requireActivity() })
+    private val parksViewModel: ParksViewModel by viewModels()
 
     private lateinit var list: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if(sharedViewModel.trailsState != SharedViewModel.PARKS) {
-            gotoTrails()
+            gotoTrails(sharedViewModel.selectedPark)
         }
         list = view.findViewById(R.id.parks_recycler_view)
-        val parkAdapter = ParkAdapter(context, listOf(
-            "Big Bend", "Canyonlands", "Deathvalley", "Yosemite"
-        ), { _: View, position: Int, _: Int ->
-            Log.d("ParkFragment", "Clicked park #${position}")
-            sharedViewModel.trailsState = SharedViewModel.TRAILS
-            gotoTrails()
-        })
-        list.adapter = parkAdapter
+
+        parksViewModel.parksListLiveData.observe(viewLifecycleOwner) {
+            updateUI(it)
+        }
     }
 
-    private fun gotoTrails() {
-        Navigation.findNavController(requireView()).navigate(R.id.action_parks_to_trails)
+    private fun updateUI(parks: List<Park>) {
+        list.adapter = ParkAdapter(parks)
+    }
+
+    private fun gotoTrails(parkId: Int) {
+        sharedViewModel.selectedPark = parkId
+        sharedViewModel.trailsState = SharedViewModel.TRAILS
+        val action = ParksFragmentDirections.actionParksToTrails(parkId)
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
+    private inner class ParkAdapter(val parks: List<Park>) : RecyclerView.Adapter<ParkHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            ParkHolder(LayoutInflater.from(context).inflate(R.layout.row_park, parent, false))
+
+        override fun onBindViewHolder(holder: ParkHolder, position: Int) = holder.bind(parks[position])
+
+        override fun getItemCount() = parks.size
+    }
+
+    private inner class ParkHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        private lateinit var park: Park
+        private val parkName: TextView = itemView.findViewById(R.id.park_name)
+        init {
+            itemView.setOnClickListener(this)
+        }
+        fun bind(park: Park) {
+            this.park = park
+            parkName.text = park.name
+        }
+        override fun onClick(v: View?) = gotoTrails(park.id)
     }
 
 }

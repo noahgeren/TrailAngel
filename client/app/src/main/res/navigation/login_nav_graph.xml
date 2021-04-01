@@ -27,5 +27,9 @@
         android:id="@+id/navigation_verify"
         android:name="com.noahgeren.trailangel.ui.login.verify.VerifyFragment"
         android:label="@string/verify"
-        tools:layout="@layout/fragment_verify" />
+        tools:layout="@layout/fragment_verify" >
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.noahgeren.trailangel.R
+import com.noahgeren.trailangel.ui.common.PreferenceUtils
 
 class LoginActivity : AppCompatActivity(R.layout.activity_login) {
 
@@ -16,6 +17,8 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login) {
         val navController = (supportFragmentManager.findFragmentById(R.id.login_fragment_view) as NavHostFragment).navController
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.navigation_login))
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        PreferenceUtils.init(this)
     }
 
     override fun onBackPressed() {

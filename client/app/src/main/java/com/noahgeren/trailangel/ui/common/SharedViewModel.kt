@@ -11,5 +11,7 @@ class SharedViewModel: ViewModel() {
     }
 
     var trailsState = PARKS
+    var selectedPark: Int = 0
+    var selectedTrail: Int = 0
 
 }

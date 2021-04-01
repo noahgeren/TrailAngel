@@ -34,7 +34,7 @@ public class UserController {
 	@PostMapping("/login/request")
 	public GeneralResponse requestLogin(final @RequestBody(required = true) User user) {
 		return new GeneralResponse()
-				.set("sent", verificationService.sendVerification(user.getPhoneNumber()) != null);
+				.set("sent", verificationService.sendVerification(user.getPhoneNumber()));
 	}
 	
 	@PostMapping("/login")

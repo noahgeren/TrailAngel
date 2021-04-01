@@ -3,6 +3,7 @@ package com.noahgeren.trailangel.ui.common
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
