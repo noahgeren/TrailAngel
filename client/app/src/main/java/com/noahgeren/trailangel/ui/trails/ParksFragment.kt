@@ -42,7 +42,6 @@ class ParksFragment : Fragment(R.layout.fragment_parks) {
 
     private fun gotoTrails(parkId: Int) {
         sharedViewModel.selectedPark = parkId
-        sharedViewModel.trailsState = SharedViewModel.TRAILS
         val action = ParksFragmentDirections.actionParksToTrails(parkId)
         Navigation.findNavController(requireView()).navigate(action)
     }
@@ -66,7 +65,10 @@ class ParksFragment : Fragment(R.layout.fragment_parks) {
             this.park = park
             parkName.text = park.name
         }
-        override fun onClick(v: View?) = gotoTrails(park.id)
+        override fun onClick(v: View?) {
+            sharedViewModel.trailsState = SharedViewModel.TRAILS
+            gotoTrails(park.id)
+        }
     }
 
 }

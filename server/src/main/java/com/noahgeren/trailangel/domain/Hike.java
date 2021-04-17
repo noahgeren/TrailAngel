@@ -6,7 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,13 +21,17 @@ public class Hike {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String trailName;
+	
+	private Double latitude, longitude;
+	
+	private Double length;
+	
 	private LocalDateTime startTime;
 	
 	private LocalDateTime endTime;
 	
-	@ManyToOne
-	private Trail trail;
-	
-	private String user;
+	@JsonIgnore
+	private User user;
 
 }

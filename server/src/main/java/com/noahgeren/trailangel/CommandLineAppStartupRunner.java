@@ -30,7 +30,16 @@ public class CommandLineAppStartupRunner implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		userRepo.save(new User("417-773-9631"));
 		List<Park> parks = parkRepo.saveAll(Arrays.asList(new Park("Yosemite"), new Park("Mark Twain")));
-		List<Trail> trails = trailRepo.saveAll(Arrays.asList(new Trail("Bridalveil Falls", 4.2, 1), new Trail("Wildflower Trail", 10d, 2)));
+		List<Trail> trails = trailRepo.saveAll(Arrays.asList(
+				new Trail("Bridalveil Falls", 1, 123.456, 123.456, 10.1, 6.5, lorem), 
+				new Trail("Wildflower Trail", 2, 987.654, 987.654, 3.1, 2d, lorem)));
 	}
+	
+	private String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+			+ "Cras a ex rhoncus, convallis ipsum quis, placerat lacus. Fusce et lectus arcu. "
+			+ "Vestibulum metus nunc, fringilla non urna nec, semper ultrices nisl. "
+			+ "Vivamus vestibulum felis ac eros tempus commodo et sed sapien. "
+			+ "Ut faucibus ac justo ac mollis. In vel libero felis. Suspendisse non quam nisi. "
+			+ "Quisque laoreet neque vel aliquam vestibulum.";
 
 }

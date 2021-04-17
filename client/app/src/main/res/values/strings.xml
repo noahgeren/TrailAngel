@@ -10,7 +10,11 @@
     <string name="parks">Parks</string>
     <string name="parks_desc">Select a park to see its trails.</string>
     <string name="trails_desc">Select a trail to see its details.</string>
-    <string name="trail_schedule">Schedule Trail</string>
+    <string name="trail_schedule">Schedule Hike</string>
+    <string name="starting_point">Starting Point:</string>
+    <string name="length">Length:</string>
+    <string name="average_hike_time">Average Hike Time:</string>
+    <string name="description">Description:</string>
     <!-- Schedule -->
     <string name="schedule">Schedule</string>
     <!-- Settings -->

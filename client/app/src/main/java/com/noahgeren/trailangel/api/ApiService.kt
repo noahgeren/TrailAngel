@@ -16,7 +16,7 @@ import java.util.concurrent.Executors
 object ApiService {
 
     private val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.0.155:8080/")
+                .baseUrl("http://192.168.0.155:8080/") // This should be your local ip address for development
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build()
     private val apiRepository = retrofit.create(ApiRepository::class.java)

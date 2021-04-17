@@ -40,11 +40,13 @@ class TrailsFragment : Fragment(R.layout.fragment_trails) {
         list.adapter = TrailAdapter(trails)
     }
 
-    private fun gotoTrailDetails(trailId: Int) {
-        sharedViewModel.selectedTrail = trailId
-        sharedViewModel.trailsState = SharedViewModel.TRAIL_DETAILS
-        val action = TrailsFragmentDirections.actionTrailsToTrailDetails(trailId)
-        Navigation.findNavController(requireView()).navigate(action)
+    private fun gotoTrailDetails(trail: Trail?) {
+        trail?.let {
+            sharedViewModel.selectedTrail = it
+            val action = TrailsFragmentDirections.actionTrailsToTrailDetails(it)
+            Navigation.findNavController(requireView()).navigate(action)
+        }
+
     }
 
     inner class TrailAdapter(private val trails: List<Trail>) : RecyclerView.Adapter<TrailHolder>() {
@@ -74,7 +76,10 @@ class TrailsFragment : Fragment(R.layout.fragment_trails) {
             trailLength.text = "${trail.length} mi"
         }
 
-        override fun onClick(view: View?) = gotoTrailDetails(trail.id)
+        override fun onClick(view: View?) {
+            sharedViewModel.trailsState = SharedViewModel.TRAIL_DETAILS
+            gotoTrailDetails(trail)
+        }
 
     }
 

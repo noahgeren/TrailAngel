@@ -35,9 +35,9 @@ public class VerificationService {
 			return false;
 		}
 		final Verification v = verificationRepo.save(new Verification(phoneNumber, generateCode()));
-//		System.out.println(v.getCode());
-//		return true;
-		return v != null ? twilioService.sendText(phoneNumber, "Trail Angel Verification Code: " + v.getCode()) : false;
+		System.out.println(v.getCode());
+		return true;
+//		return v != null ? twilioService.sendText(phoneNumber, "Trail Angel Verification Code: " + v.getCode()) : false;
 	}
 	
 	private String generateCode() {

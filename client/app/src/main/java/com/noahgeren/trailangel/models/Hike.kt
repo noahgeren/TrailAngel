@@ -1,17 +1,15 @@
 package com.noahgeren.trailangel.models
 
-import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
+import java.time.LocalDateTime
 
-@Entity
-data class Trail(
-    @PrimaryKey val id: Int = 0,
-    val name: String? = null,
-    val parkId: Int? = null,
+data class Hike(
+    @PrimaryKey val id: Int? = null,
+    val trailName: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
     val length: Double? = null,
-    val hikeTime: Double? = null,
-    val description: String? = null
+    val startTime: LocalDateTime? = null,
+    val endTime: LocalDateTime? = null
 ): Serializable
