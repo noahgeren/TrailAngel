@@ -18,7 +18,8 @@ class SettingsViewModel : ViewModel(), ContactViewModel {
 
     private val contacts by lazy {
         MutableLiveData(mutableListOf(
-            Contact("Test Tester", "+1-123-456-7890")
+            Contact("John Adams", "+1-123-456-7890"),
+            Contact("Austin Powers", "+1-123-456-7890")
         ))
     }
 

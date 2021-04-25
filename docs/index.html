@@ -7,17 +7,138 @@
 	<title>Trail Angel</title>
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Pacifico&display=swap" rel="stylesheet">
     <!-- Custom Styles -->
     <style>
-
+        html { 
+            scroll-behavior: smooth;
+            text-shadow: #000 2px 2px;
+        }
+        #info {
+            font-size: 1.25rem;
+            font-family: 'Lato', sans-serif;
+        }
+        .cursive {
+            font-family: 'Pacifico', cursive;
+            
+        }
+        .background-image {
+            /* Wikimedia commons image */
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: bottom;
+            background-color: black;
+            z-index: -1;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .background-image::before {
+            content: "";
+            background-color: #111;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .max-vh-50 {
+            max-height: 75vh;
+        }
+        .max-vh-100 {
+            max-height: 100vh;
+            overflow: hidden;
+        }
+        #scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            width: 3rem;
+            height: 3rem;
+            margin-left: calc(3rem / -2);
+            background-color: #fff;
+            border: 1px solid #000;
+            border-radius: 100%;
+            box-sizing: border-box;
+        }
+        #scroll::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            content: '';
+            width: 16px;
+            height: 16px;
+            margin: -12px 0 0 -8px;
+            border-left: 2px solid #000;
+            border-bottom: 2px solid #000;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            box-sizing: border-box;
+        }
+        #play-button {
+            width: 250px;
+            cursor: pointer;
+        }
+        .bg-green {
+            background-color: #00b894;
+        }
+        .w-250 {
+            width: 250px;
+        }
     </style>
 </head>
 <body>
-    <div class="container-fluid bg-success">
-        <div class="row">
-            <div class="col">
-                <h1>Hello World!</h1>
+    <div class="container-fluid min-vh-100 background-image"></div>
+    <div class="container-fluid text-light min-vh-100 d-flex flex-column">
+        <div class="row max-vh-100">
+            <div class="col-12 mt-5 text-center">
+                <h1 class="display-1 cursive mb-5">Trail Angel</h1>
+                <img class="img-fluid max-vh-50 mb-3" src="screenshot-1.png" />
+            </div>
+            <a href="#info" id="scroll"></a>
+        </div>
+        <div class="row bg-green p-lg-4 py-4 flex-grow-1" id="info">
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <h1 class="display-3 cursive mt-1 px-2">What is it?</h1>
+                <p class="px-3">
+                    Hiking is a fun hobbie, but it can also be a dangerous one. Just in case something bad happens it is best to let someone know where
+                    you are going to be so that they can send help. However it isn't always easy to remember to let your friends and family know where you are.
+                    This can be especially frustrating if you remember once you've reached the trail, but you no longer have cell service. This is where Trail Angel comes in:
+                    <br /><br />
+                    Trail Angel is an android app that allows you to schedule hikes in advanced so that your friends and family can always know that you're safe.  
+                </p>
+                <h1 class="display-3 cursive px-2">How does it work?</h1>
+                <p class="px-3">
+                    <ol>
+                        <li>Pick from a list of known trails that we have precompiled information for.</li>
+                        <li>Schedule the time and date that you are going the be hiking the trail.</li>
+                        <li>Enter the name and phone numbers of the people you want contacted while hiking.</li>
+                        <li>Now, before and after the hike, those people will get texts telling them where you are.</li>
+                    </ol>
+                    <div class="text-center">
+                        <img src="screenshot-2.png" class="img-fluid border border-dark rounded-lg m-2 w-250" />
+                        <img src="screenshot-3.png" class="img-fluid border border-dark rounded-lg m-2 w-250" />
+                    </div>
+                    
+                </p>
+                <h1 class="display-3 cursive px-2">How much does it cost?</h1>
+                <p class="px-3">
+                    Trail Angel is completely <strong>FREE</strong>.
+                </p>
+            </div>
+            <div class="col-12 text-center">
+                <img class="img-fluid" src="google-play-badge.png" id="play-button" onclick="return alert('This app is not on the Google Play store yet.')" />
+            </div>
+        </div>
+        <div class="row bg-dark text-center py-2">
+            <div class="col-12">
+                &copy; 2021 Noah Geren
+            </div>
+            <div class="col-12">
+                Google Play and the Google Play logo are trademarks of Google LLC.
             </div>
         </div>
     </div>

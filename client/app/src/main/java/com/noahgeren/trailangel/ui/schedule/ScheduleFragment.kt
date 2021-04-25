@@ -16,6 +16,9 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
         val scheduleAdapter = ScheduleAdapter(context, listOf(
             listOf("Friday Feb 26", "7:30 AM", "14 HR", "Half Dome"),
             listOf("Monday Mar 1", "12:00 PM", "5 HR", "Bridalveil Falls"),
+            listOf("Saturday Apr 24", "8:00 AM", "3 HR", "Horseshoe Trail"),
+            listOf("Saturday Apr 24", "1:00 PM", "5 HR", "Wildflower Trail"),
+            listOf("Saturday Apr 25", "9:00 PM", "2 HR", "Firefalls")
         ))
         list.adapter = scheduleAdapter
     }

@@ -29,7 +29,18 @@ public class CommandLineAppStartupRunner implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		userRepo.save(new User("417-773-9631"));
-		List<Park> parks = parkRepo.saveAll(Arrays.asList(new Park("Yosemite"), new Park("Mark Twain")));
+		List<Park> parks = parkRepo.saveAll(Arrays.asList(
+				new Park("Mesa Verde"),
+				new Park("North Cascades"),
+				new Park("Sequoia"),
+				new Park("Shenandoah"),
+				new Park("Theodore Roosevelt"),
+				new Park("White Sands"),
+				new Park("Yellowstone"),
+				new Park("Yosemite"),
+				new Park("Zion"),
+				new Park("test")
+			));
 		List<Trail> trails = trailRepo.saveAll(Arrays.asList(
 				new Trail("Bridalveil Falls", 1, 123.456, 123.456, 10.1, 6.5, lorem), 
 				new Trail("Wildflower Trail", 2, 987.654, 987.654, 3.1, 2d, lorem)));

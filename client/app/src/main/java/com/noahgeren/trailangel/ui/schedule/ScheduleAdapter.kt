@@ -19,6 +19,12 @@ class ScheduleAdapter(private val context: Context?, private val trails: List<Li
         holder.startTime.text = trails[position][1]
         holder.duration.text = trails[position][2]
         holder.trailName.text = trails[position][3]
+        if(position > 0) {
+            val previous = trails[position - 1]
+            if(previous[0] == trails[position][0]) {
+                holder.date.visibility = View.GONE
+            }
+        }
     }
 
     override fun getItemCount(): Int {
