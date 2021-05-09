@@ -32,6 +32,6 @@ public class Hike {
 	private LocalDateTime endTime;
 	
 	@JsonIgnore
-	private User user;
+	private String user;
 
 }
