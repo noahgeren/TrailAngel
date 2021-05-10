@@ -7,6 +7,15 @@
     tools:context=".ui.login.LoginFragment">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trail Angel"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/login_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/login_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

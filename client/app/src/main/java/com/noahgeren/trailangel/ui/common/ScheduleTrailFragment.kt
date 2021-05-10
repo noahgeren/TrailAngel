@@ -113,6 +113,9 @@ class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
                 if(isStartTime) {
                     hike.startTime = hike.startTime.withHour(hourOfDay)
                     hike.startTime = hike.startTime.withMinute(minute)
+                    if(hike.startTime.isAfter(hike.endTime)) {
+                        hike.endTime = hike.startTime.plusHours(1)
+                    }
                 } else {
                     hike.endTime = hike.endTime.withHour(hourOfDay)
                     hike.endTime = hike.endTime.withMinute(minute)
@@ -131,6 +134,9 @@ class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
                     hike.startTime = hike.startTime.withYear(year)
                     hike.startTime = hike.startTime.withMonth(month)
                     hike.startTime = hike.startTime.withDayOfMonth(dayOfMonth)
+                    if(hike.startTime.isAfter(hike.endTime)) {
+                        hike.endTime = hike.startTime.plusHours(1)
+                    }
                 } else {
                     hike.endTime = hike.endTime.withYear(year)
                     hike.endTime = hike.endTime.withMonth(month)
