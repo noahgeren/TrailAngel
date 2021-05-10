@@ -43,9 +43,12 @@ public class UserController {
 		final GeneralResponse response = new GeneralResponse().set("login", verified);
 		if(verified) {
 			User user = userService.findUser(verification.getPhoneNumber());
-			response.set("setup", user == null);
+			response.set("setup", user == null || user.getName() == null);
 			if(user == null) {
 				user = userService.createUser(verification.getPhoneNumber());
+			} else {
+				response.set("name", user.getName());
+				response.set("trailName", user.getTrailName());
 			}
 			response.set("token", authentication.generateToken(user));
 		}
@@ -53,16 +56,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/update")
-	public GeneralResponse setupAccount(final Principal principal, final @RequestBody(required = true) User user) {
+	public User setupAccount(final Principal principal, final @RequestBody(required = true) User user) {
 		user.setPhoneNumber(principal.getName());
-		final User savedUser = userService.saveUser(user);
-		return new GeneralResponse().set("saved", savedUser != null);
+		User savedUser = userService.saveUser(user);
+		return savedUser;
 	}
-	
-	@GetMapping("/info")
-	public User getUserInfo(final Principal principal, final TimeZone timezone) {
-		System.out.println(timezone);
-		return userService.findUser(principal.getName());
-	}
-
 }

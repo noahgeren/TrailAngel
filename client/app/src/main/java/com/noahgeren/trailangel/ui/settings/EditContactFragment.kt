@@ -1,6 +1,9 @@
 package com.noahgeren.trailangel.ui.settings
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
+import android.telephony.PhoneNumberUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -30,11 +33,19 @@ class EditContactFragment: Fragment(R.layout.fragment_edit_contact) {
         contact = args.contact
 
         name.setText(contact.name)
-        phoneNumber.setText(contact.phoneNumber)
+        phoneNumber.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        val startIndex = if(contact.phoneNumber!!.length > 2) 2 else 0
+        phoneNumber.setText(contact.phoneNumber?.substring(startIndex))
 
         submit.setOnClickListener {
             Utils.hideKeyboard(requireActivity())
-            EmergencyContactRepository.get().saveContact(EmergencyContact(contact.id, name.text.toString(), phoneNumber.text.toString(), contact.user))
+            val phoneNumber = PhoneNumberUtils.normalizeNumber("+1" + this.phoneNumber.text.toString())
+            if(!PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)) {
+                Utils.showAlert(requireContext(), "Error", "Invalid phone number.", null, "Ok", "",
+                    { _: DialogInterface, _: Int -> }, { _: DialogInterface, _: Int -> })
+                return@setOnClickListener
+            }
+            EmergencyContactRepository.get().saveContact(EmergencyContact(contact.id, name.text.toString(), phoneNumber, contact.user))
             Navigation.findNavController(view).navigateUp()
         }
 

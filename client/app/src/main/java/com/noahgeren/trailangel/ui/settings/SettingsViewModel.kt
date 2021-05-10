@@ -11,21 +11,4 @@ class SettingsViewModel : ViewModel() {
 
     val contactsLiveListData = contactRepository.getContacts()
 
-    private val name by lazy {
-        MutableLiveData("Noah Geren")
-    }
-
-    private val trailName by lazy {
-        MutableLiveData("Trail Name")
-    }
-
-    fun getName(): LiveData<String> = name
-    fun getTrailName(): LiveData<String> = trailName
-
-    fun setTrailName(trailName: String) {
-        this.trailName.apply {
-            value = trailName
-        }
-    }
-
 }

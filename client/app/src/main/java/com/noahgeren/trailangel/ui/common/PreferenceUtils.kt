@@ -7,8 +7,10 @@ import com.noahgeren.trailangel.R
 
 object PreferenceUtils {
 
-    private val apiPrefName ="API_PREFS";
-    private val apiAuthToken = "API_AUTH_TOKEN";
+    private val prefName ="TRAIL_ANGEL_PREFS"
+    private val apiAuthToken = "API_AUTH_TOKEN"
+    private val userName = "USER_NAME"
+    private val userTrailName = "USER_TRAIL_NAME"
 
     private var sharedPref: SharedPreferences? = null
 
@@ -26,9 +28,29 @@ object PreferenceUtils {
         }
     }
 
+    fun setName(value: String?) {
+        sharedPref?.let {
+            it.edit().putString(userName, value).apply()
+        }
+    }
+
+    fun setTrailName(value: String?) {
+        sharedPref?.let {
+            it.edit().putString(userTrailName, value).apply()
+        }
+    }
+
+    fun getName(): String? {
+        return sharedPref?.getString(userName, null)
+    }
+
+    fun getTrailName(): String? {
+        return sharedPref?.getString(userTrailName, null)
+    }
+
     private fun loadSharedPref(context: Context) {
         if (sharedPref == null) {
-            sharedPref =  context.getSharedPreferences(apiPrefName, Context.MODE_PRIVATE)
+            sharedPref =  context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
         }
     }
 

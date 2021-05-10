@@ -1,6 +1,7 @@
 package com.noahgeren.trailangel.ui.login.verify
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.noahgeren.trailangel.R
 import com.noahgeren.trailangel.api.ApiService
@@ -45,12 +47,20 @@ class VerifyFragment : Fragment(R.layout.fragment_verify) {
                 override fun onResponse(call: Call<Map<String, Any>>, response: Response<Map<String, Any>>) {
                     if(response.body()?.get("login") == true) {
                         PreferenceUtils.setToken(response.body()?.get("token") as String)
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        requireActivity().finish()
-                        startActivity(intent)
+                        if(response.body()?.get("setup") == true) {
+                            val action = VerifyFragmentDirections.actionNavigationVerifyToFragmentSetup()
+                            Navigation.findNavController(view).navigate(action)
+                        } else {
+                            PreferenceUtils.setName(response.body()?.get("name") as String)
+                            PreferenceUtils.setTrailName(response.body()?.get("trailName") as String)
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            requireActivity().finish()
+                            startActivity(intent)
+                        }
                     } else {
-
+                        Utils.showAlert(requireContext(), "Error", "Incorrect access code.", null, "Ok", "",
+                            { _: DialogInterface, _: Int -> }, { _: DialogInterface, _: Int -> })
                     }
                 }
                 override fun onFailure(call: Call<Map<String, Any>>, t: Throwable) {

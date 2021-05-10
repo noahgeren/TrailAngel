@@ -16,6 +16,9 @@ interface ApiRepository {
     @POST("/user/login")
     fun login(@Body verification: Verification): Call<Map<String, Any>>
 
+    @POST("/user/update")
+    fun updateUser(@Body user: User, @Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<User>
+
     @GET("/parks/all")
     fun getParks(@Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<List<Park>>
 

@@ -17,7 +17,9 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.noahgeren.trailangel.R
+import com.noahgeren.trailangel.api.ApiService
 import com.noahgeren.trailangel.models.EmergencyContact
+import com.noahgeren.trailangel.models.User
 import com.noahgeren.trailangel.ui.MainActivity
 import com.noahgeren.trailangel.ui.common.PreferenceUtils
 import com.noahgeren.trailangel.ui.common.Utils
@@ -44,16 +46,18 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         changeTrailName = view.findViewById(R.id.settings_change_trail_name)
         addContact = view.findViewById(R.id.settings_add_contact)
         logout = view.findViewById(R.id.settings_logout)
-        Utils.setBasicTextObserver(mapOf(
-            viewModel.getName() to nameText,
-            viewModel.getTrailName() to trailNameText,
-        ), viewLifecycleOwner)
+
+        nameText.text = PreferenceUtils.getName()
+        trailNameText.text = PreferenceUtils.getTrailName()
 
         changeTrailName.setOnClickListener {
             val alertView = LayoutInflater.from(context).inflate(R.layout.alert_change_trail_name, view as ViewGroup, false)
             val alertInput: EditText = alertView.findViewById(R.id.alert_trail_name)
             Utils.showAlert(requireContext(), "Change Trail Name", null, alertView, "Save", "Cancel",
-                { _, _ -> viewModel.setTrailName(alertInput.text.toString()) },
+                { _, _ ->
+                    ApiService.updateAccount(User("", PreferenceUtils.getName(), alertInput.text.toString()))
+                    trailNameText.text = alertInput.text.toString()
+                },
                 {dialog, _ -> dialog.cancel()})
         }
 

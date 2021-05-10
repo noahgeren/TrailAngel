@@ -46,7 +46,6 @@ public class HikeController {
 		} else {
 			hike.setUser(principal.getName());
 		}
-		System.out.println("Saving " + hike.toString());
 		return hikeService.save(hike);
 	}
 	

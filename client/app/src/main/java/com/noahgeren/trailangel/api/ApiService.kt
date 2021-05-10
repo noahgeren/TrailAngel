@@ -8,6 +8,7 @@ import com.noahgeren.trailangel.database.HikeRepository
 import com.noahgeren.trailangel.database.ParkRepository
 import com.noahgeren.trailangel.database.TrailRepository
 import com.noahgeren.trailangel.models.*
+import com.noahgeren.trailangel.ui.common.PreferenceUtils
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -29,6 +30,17 @@ object ApiService {
 
     fun login(verification: Verification, callback: Callback<Map<String, Any>>?) {
         apiRepository.login(verification).enqueue(createCallback(callback))
+    }
+
+    fun updateAccount(user: User, callback: Callback<User>? = null) {
+        apiRepository.updateUser(user).enqueue(createCallback(callback, object: Callback<User>() {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                response.body()?.let {
+                    PreferenceUtils.setName(it.name)
+                    PreferenceUtils.setTrailName(it.trailName)
+                }
+            }
+        }))
     }
 
     fun getParks(callback: Callback<List<Park>>? = null) {

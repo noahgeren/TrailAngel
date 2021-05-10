@@ -28,14 +28,13 @@ public class CommandLineAppStartupRunner implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		userRepo.save(new User("+1 417-597-4732", "Noah Geren", "Trail Name"));
 		List<Park> parks = parkRepo.saveAll(Arrays.asList(
 				new Park("Canyonlands"),
 				new Park("Yellowstone"),
 				new Park("Yosemite")
 			));
 		List<Trail> trails = trailRepo.saveAll(Arrays.asList(
-				new Trail("Gooseberry Canyon", 1, 38.2136, 109.9025, 5.4, 5d, "sland in the Sky's steepest trail rapidly descends 1,400 feet (427 m) to the White Rim bench. Rough switchbacks cross sheer cliffs and scree slopes. Step carefully, and don't forget to look up to take in the view. Elevation change: 1,400 feet / 427 m"),
+				new Trail("Gooseberry Canyon", 1, 38.2136, 109.9025, 5.4, 5d, "Island in the Sky's steepest trail rapidly descends 1,400 feet (427 m) to the White Rim bench. Rough switchbacks cross sheer cliffs and scree slopes. Step carefully, and don't forget to look up to take in the view. Elevation change: 1,400 feet / 427 m"),
 				new Trail("Murphy Point", 1, 38.2136, 109.9025, 3.6, 2d, "This longer hike leads past a historic corral on the mesa top. The trail ends with panoramic views of Candlestick Tower, the Green River, and the White Rim Road."),
 				new Trail("Upheaval Dome", 1, 38.2136, 109.9025, 1d, 0.5, "A short but steep trail leads to a clear view into Upheaval Dome. Exhibits at the end of the trail discuss this unique geologic feature. One-hundred-foot elevation change (30 m). Hiking to second overlook adds 1 mile (1.5 km) and 50 feet (15 m) elevation change."),
 				new Trail("White Rim Overlook", 1, 38.2136, 109.9025, 1.8, 1.5, "Walk to an east-facing overlook for views of the Colorado River, Monument Basin, and La Sal Mountains. Best in late afternoon. Very limited trailhead parking."),
@@ -48,12 +47,4 @@ public class CommandLineAppStartupRunner implements CommandLineRunner{
 				new Trail("Lower Yosemite Fall", 3, 37.8651, 119.5383, 1d, 0.5, "Part of North America's tallest waterfall, Lower Yosemite Fall is the final 320-foot (98-meter) drop. Deafening in spring and early summer when the waterfall peaks in volume, you can expect to get sprayed with water when standing on the footbridge near its base."),
 				new Trail("Yosemite Falls", 3, 37.8651, 119.5383, 7.2, 7d, "One of Yosemite's oldest historic trails (built 1873 to 1877), the Yosemite Falls Trail leads to the top of North America’s tallest waterfall, which rises 2,425 feet (739 m) above the Valley floor.")));
 	}
-	
-	private String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-			+ "Cras a ex rhoncus, convallis ipsum quis, placerat lacus. Fusce et lectus arcu. "
-			+ "Vestibulum metus nunc, fringilla non urna nec, semper ultrices nisl. "
-			+ "Vivamus vestibulum felis ac eros tempus commodo et sed sapien. "
-			+ "Ut faucibus ac justo ac mollis. In vel libero felis. Suspendisse non quam nisi. "
-			+ "Quisque laoreet neque vel aliquam vestibulum.";
-
 }
