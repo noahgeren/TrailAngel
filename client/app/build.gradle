@@ -56,6 +56,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-jackson
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3'
+
 
 
 }

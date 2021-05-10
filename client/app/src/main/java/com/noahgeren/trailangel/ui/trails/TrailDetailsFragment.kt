@@ -51,7 +51,7 @@ class TrailDetailsFragment: Fragment(R.layout.fragment_trail_details) {
                 startTime.plusHours(1)
             }
             val action = TrailDetailsFragmentDirections.actionNavigationTrailDetailsToScheduleTrailFragment(
-                Hike(null, trail.name, trail.latitude, trail.longitude, trail.length, startTime, endTime)
+                Hike(null, trail.name ?: "", trail.latitude, trail.longitude, trail.length, startTime, endTime, null)
             )
             Navigation.findNavController(requireView()).navigate(action)
         }

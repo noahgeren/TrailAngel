@@ -1,9 +1,6 @@
 package com.noahgeren.trailangel.api
 
-import com.noahgeren.trailangel.models.Park
-import com.noahgeren.trailangel.models.Trail
-import com.noahgeren.trailangel.models.User
-import com.noahgeren.trailangel.models.Verification
+import com.noahgeren.trailangel.models.*
 import com.noahgeren.trailangel.ui.common.PreferenceUtils
 import retrofit2.Call
 import retrofit2.http.Body
@@ -24,5 +21,11 @@ interface ApiRepository {
 
     @GET("/trails/all")
     fun getTrails(@Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<List<Trail>>
+
+    @GET("/hike/all")
+    fun getHikes(@Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<List<Hike>>
+
+    @POST("/hike/save")
+    fun saveHike(@Body hike: Hike, @Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<Hike>
 
 }

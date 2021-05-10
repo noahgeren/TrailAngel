@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.noahgeren.trailangel.domain.Hike;
+import com.noahgeren.trailangel.domain.User;
 import com.noahgeren.trailangel.dto.GeneralResponse;
 import com.noahgeren.trailangel.services.HikeService;
 import com.noahgeren.trailangel.services.UserService;
@@ -34,27 +35,32 @@ public class HikeController {
 	}
 	
 	@PostMapping("/save")
-	public GeneralResponse saveHike(final Principal principal, @RequestBody final Hike hike) {
+	public Hike saveHike(final Principal principal, @RequestBody final Hike hike) {
+		if(principal == null) return null;
 		if(hike.getId() != null) {
 			final Hike oldHike = hikeService.findById(hike.getId());
 			if(oldHike != null && !oldHike.getUser().equals(principal.getName())) {
-				return new GeneralResponse().set("success", false);
+				return null;
 			}
 			hike.setUser(oldHike.getUser());
+		} else {
+			hike.setUser(principal.getName());
 		}
-		return new GeneralResponse().set("success", hikeService.save(hike) != null);
+		System.out.println("Saving " + hike.toString());
+		return hikeService.save(hike);
 	}
 	
 	@PostMapping("/delete")
-	public GeneralResponse deleteHike(final Principal principal, @RequestBody Hike hike) {
+	public Hike deleteHike(final Principal principal, @RequestBody Hike hike) {
+		if(principal == null) return null;
 		if(hike.getId() != null) {
 			hike = hikeService.findById(hike.getId());
 			if(hike != null && hike.getUser().equals(principal.getName())) {
 				hikeService.deleteById(hike.getId());
-				return new GeneralResponse().set("success", true);
+				return hike;
 			}
 		}
-		return new GeneralResponse().set("success", false);
+		return null;
 	}
 
 }

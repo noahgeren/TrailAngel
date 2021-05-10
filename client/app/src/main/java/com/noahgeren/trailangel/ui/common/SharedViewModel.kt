@@ -1,6 +1,8 @@
 package com.noahgeren.trailangel.ui.common
 
 import androidx.lifecycle.ViewModel
+import com.noahgeren.trailangel.database.HikeRepository
+import com.noahgeren.trailangel.models.Hike
 import com.noahgeren.trailangel.models.Trail
 
 class SharedViewModel: ViewModel() {

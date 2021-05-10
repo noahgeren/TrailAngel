@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.noahgeren.trailangel.domain.EmergencyContact;
-import com.noahgeren.trailangel.dto.GeneralResponse;
 import com.noahgeren.trailangel.services.EmergencyContactService;
 import com.noahgeren.trailangel.services.UserService;
 
@@ -34,27 +33,31 @@ public class EmergencyContactController {
 	}
 	
 	@PostMapping("/save")
-	public GeneralResponse saveContact(final Principal principal, @RequestBody final EmergencyContact contact) {
+	public EmergencyContact saveContact(final Principal principal, @RequestBody final EmergencyContact contact) {
+		if(principal == null) return null;
 		if(contact.getId() != null) {
 			final EmergencyContact oldContact = contactService.findById(contact.getId());
 			if(oldContact != null && !oldContact.getUser().equals(principal.getName())) {
-				return new GeneralResponse().set("success", false);
+				return null;
 			}
 			contact.setUser(oldContact.getUser());
+		} else {
+			contact.setUser(principal.getName());
 		}
-		return new GeneralResponse().set("success", contactService.save(contact) != null);
+		return contactService.save(contact);
 	}
 	
 	@PostMapping("/delete")
-	public GeneralResponse deleteHike(final Principal principal, @RequestBody EmergencyContact contact) {
+	public EmergencyContact deleteContact(final Principal principal, @RequestBody EmergencyContact contact) {
+		if(principal == null) return null;
 		if(contact.getId() != null) {
 			contact = contactService.findById(contact.getId());
 			if(contact != null && contact.getUser().equals(principal.getName())) {
 				contactService.deleteById(contact.getId());
-				return new GeneralResponse().set("success", true);
+				return contact;
 			}
 		}
-		return new GeneralResponse().set("success", false);
+		return null;
 	}
 
 	

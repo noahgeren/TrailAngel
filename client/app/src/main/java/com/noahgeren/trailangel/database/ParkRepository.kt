@@ -9,17 +9,15 @@ import com.noahgeren.trailangel.models.Park
 import java.lang.IllegalStateException
 import java.util.concurrent.Executors
 
-private const val DATABASE_NAME = "trail-angel-database"
+private const val DATABASE_NAME = "fuck-this-stupid-shit"
 
 class ParkRepository private constructor(context: Context){
 
-    private val database: ParkDatabase = Room.databaseBuilder(
-        context.applicationContext,
-        ParkDatabase::class.java,
-        DATABASE_NAME
-    ).fallbackToDestructiveMigration().build()
+    init {
+        RoomDatabase.build(context)
+    }
 
-    private val parkDao = database.parkDao()
+    private val parkDao = RoomDatabase.get().parkDao()
     private val executor = Executors.newSingleThreadExecutor()
     private var parksLoaded = false
 

@@ -26,9 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingVertical="5dp"
-            android:clickable="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:focusable="true">
+            android:background="?android:attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/schedule_start_time"

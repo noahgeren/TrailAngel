@@ -1,12 +1,12 @@
 package com.noahgeren.trailangel.api
 
 import android.util.Log
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.noahgeren.trailangel.database.HikeRepository
 import com.noahgeren.trailangel.database.ParkRepository
 import com.noahgeren.trailangel.database.TrailRepository
-import com.noahgeren.trailangel.models.Park
-import com.noahgeren.trailangel.models.Trail
-import com.noahgeren.trailangel.models.User
-import com.noahgeren.trailangel.models.Verification
+import com.noahgeren.trailangel.models.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -17,7 +17,7 @@ object ApiService {
 
     private val retrofit = Retrofit.Builder()
                 .baseUrl("http://192.168.0.155:8080/") // This should be your local ip address for development
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().registerModule(JavaTimeModule())))
                 .build()
     private val apiRepository = retrofit.create(ApiRepository::class.java)
     private val executor = Executors.newSingleThreadExecutor()
@@ -45,6 +45,26 @@ object ApiService {
             override fun onResponse(call: Call<List<Trail>>, response: Response<List<Trail>>) {
                 response.body()?.let {
                     TrailRepository.get().insertTrails(it)
+                }
+            }
+        }))
+    }
+
+    fun getHikes(callback: Callback<List<Hike>>? = null) {
+        apiRepository.getHikes().enqueue(createCallback(callback, object: Callback<List<Hike>>() {
+            override fun onResponse(call: Call<List<Hike>>, response: Response<List<Hike>>) {
+                response.body()?.let {
+                    HikeRepository.get().insertHikes(it)
+                }
+            }
+        }))
+    }
+
+    fun saveHike(hike: Hike, callback: Callback<Hike>? = null) {
+        apiRepository.saveHike(hike).enqueue(createCallback(callback, object: Callback<Hike>() {
+            override fun onResponse(call: Call<Hike>, response: Response<Hike>) {
+                response.body()?.let {
+                    HikeRepository.get().insertHike(it)
                 }
             }
         }))

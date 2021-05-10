@@ -9,17 +9,15 @@ import com.noahgeren.trailangel.models.Trail
 import java.lang.IllegalStateException
 import java.util.concurrent.Executors
 
-private const val DATABASE_NAME = "trail-angel-database"
+private const val DATABASE_NAME = "fuck-this-stupid-shit"
 
 class TrailRepository private constructor(context: Context) {
 
-    private val database: TrailDatabase = Room.databaseBuilder(
-        context.applicationContext,
-        TrailDatabase::class.java,
-        DATABASE_NAME
-    ).fallbackToDestructiveMigration().build()
+    init {
+        RoomDatabase.build(context)
+    }
 
-    private val trailDao = database.trailDao()
+    private val trailDao = RoomDatabase.get().trailDao()
     private val executor = Executors.newSingleThreadExecutor()
     private var trailsLoaded = false
 

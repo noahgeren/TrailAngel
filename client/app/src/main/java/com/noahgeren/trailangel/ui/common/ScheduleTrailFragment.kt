@@ -10,8 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noahgeren.trailangel.R
+import com.noahgeren.trailangel.database.HikeRepository
 import com.noahgeren.trailangel.models.Hike
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -20,7 +24,7 @@ import java.util.*
 
 
 @RequiresApi(Build.VERSION_CODES.O)
-private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 
 class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
 
@@ -55,10 +59,24 @@ class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
         hike = args.hike
 
         editStartTime.setOnClickListener {
-            getDateTimeInput(hike.startTime)
+            getDateTimeInput(true)
         }
         editEndTime.setOnClickListener {
-            getDateTimeInput(hike.endTime)
+            getDateTimeInput(false)
+        }
+
+        submit.setOnClickListener {
+            HikeRepository.get().saveHike(Hike(
+                hike.id,
+                trailName.text.toString(),
+                latitude.text.toString().toDoubleOrNull(),
+                longitude.text.toString().toDoubleOrNull(),
+                length.text.toString().toDoubleOrNull(),
+                hike.startTime,
+                hike.endTime,
+                hike.user
+            ))
+            findNavController().navigate(R.id.navigation_schedule)
         }
 
         updateUI()
@@ -66,9 +84,8 @@ class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun updateUI() {
-        hike.trailName?.let {
-            trailName.setText(it)
-        }
+        // TODO: This is overriding changed values
+        trailName.setText(hike.trailName)
         hike.latitude?.let {
             latitude.setText("" + it)
         }
@@ -78,38 +95,53 @@ class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
         hike.length?.let {
             length.setText("" + it)
         }
-        hike.startTime?.let {
+        hike.startTime.let {
             startTime.setText(it.format(formatter))
         }
-        hike.endTime?.let {
+        hike.endTime.let {
             endTime.setText(it.format(formatter))
         }
     }
 
-    private fun getDateTimeInput(dateTime: LocalDateTime?) {
-        val c: Calendar = Calendar.getInstance()
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getDateTimeInput(isStartTime: Boolean) {
 
-        val mHour = c.get(Calendar.HOUR_OF_DAY)
-        val mMinute = c.get(Calendar.MINUTE)
+        val dateTime: LocalDateTime = if(isStartTime) hike.startTime else hike.endTime
 
         TimePickerDialog(
             requireContext(),
-            { view, hourOfDay, minute -> /* TODO */},
-            mHour,
-            mMinute,
+            { _, hourOfDay, minute ->
+                if(isStartTime) {
+                    hike.startTime = hike.startTime.withHour(hourOfDay)
+                    hike.startTime = hike.startTime.withMinute(minute)
+                } else {
+                    hike.endTime = hike.endTime.withHour(hourOfDay)
+                    hike.endTime = hike.endTime.withMinute(minute)
+                }
+                updateUI()
+            },
+            dateTime.hour,
+            dateTime.minute,
             false
         ).show()
 
-        val mYear = c.get(Calendar.YEAR)
-        val mMonth = c.get(Calendar.MONTH)
-        val mDay = c.get(Calendar.DAY_OF_MONTH)
-
         DatePickerDialog(
             requireContext(),
-            { view, year, monthOfYear, dayOfMonth -> /* TODO */ },
-            mYear,
-            mMonth,
-            mDay
+            { _, year, month, dayOfMonth ->
+                if(isStartTime) {
+                    hike.startTime = hike.startTime.withYear(year)
+                    hike.startTime = hike.startTime.withMonth(month)
+                    hike.startTime = hike.startTime.withDayOfMonth(dayOfMonth)
+                } else {
+                    hike.endTime = hike.endTime.withYear(year)
+                    hike.endTime = hike.endTime.withMonth(month)
+                    hike.endTime = hike.endTime.withDayOfMonth(dayOfMonth)
+                }
+                updateUI()
+            },
+            dateTime.year,
+            dateTime.monthValue,
+            dateTime.dayOfMonth
         ).show()
 
     }
