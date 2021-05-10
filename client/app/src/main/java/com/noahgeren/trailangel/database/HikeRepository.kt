@@ -9,8 +9,6 @@ import com.noahgeren.trailangel.models.Park
 import java.lang.IllegalStateException
 import java.util.concurrent.Executors
 
-
-
 class HikeRepository private constructor(context: Context) {
 
     init {
@@ -22,7 +20,7 @@ class HikeRepository private constructor(context: Context) {
     private var hikesLoaded = false
 
     fun getHikes(): LiveData<List<Hike>> {
-        if(!hikesLoaded) { // TODO: Add caching
+        if(!hikesLoaded) {
             ApiService.getHikes()
             hikesLoaded = true
         }

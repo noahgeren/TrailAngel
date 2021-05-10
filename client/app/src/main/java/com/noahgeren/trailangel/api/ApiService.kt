@@ -3,6 +3,7 @@ package com.noahgeren.trailangel.api
 import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.noahgeren.trailangel.database.EmergencyContactRepository
 import com.noahgeren.trailangel.database.HikeRepository
 import com.noahgeren.trailangel.database.ParkRepository
 import com.noahgeren.trailangel.database.TrailRepository
@@ -65,6 +66,26 @@ object ApiService {
             override fun onResponse(call: Call<Hike>, response: Response<Hike>) {
                 response.body()?.let {
                     HikeRepository.get().insertHike(it)
+                }
+            }
+        }))
+    }
+
+    fun getContacts(callback: Callback<List<EmergencyContact>>? = null) {
+        apiRepository.getContacts().enqueue(createCallback(callback, object: Callback<List<EmergencyContact>>() {
+            override fun onResponse(call: Call<List<EmergencyContact>>, response: Response<List<EmergencyContact>>) {
+                response.body()?.let {
+                    EmergencyContactRepository.get().insertContacts(it)
+                }
+            }
+        }))
+    }
+
+    fun saveContact(contact: EmergencyContact, callback: Callback<EmergencyContact>? = null) {
+        apiRepository.saveContact(contact).enqueue(createCallback(callback, object: Callback<EmergencyContact>() {
+            override fun onResponse(call: Call<EmergencyContact>, response: Response<EmergencyContact>) {
+                response.body()?.let {
+                    EmergencyContactRepository.get().insertContact(contact)
                 }
             }
         }))

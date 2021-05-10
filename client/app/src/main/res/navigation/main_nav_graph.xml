@@ -29,7 +29,11 @@
         android:id="@+id/navigation_settings"
         android:name="com.noahgeren.trailangel.ui.settings.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_editContactFragment"
+            app:destination="@id/editContactFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_trails"
@@ -62,5 +66,14 @@
         <argument
             android:name="hike"
             app:argType="com.noahgeren.trailangel.models.Hike" />
+    </fragment>
+    <fragment
+        android:id="@+id/editContactFragment"
+        android:name="com.noahgeren.trailangel.ui.settings.EditContactFragment"
+        android:label="Edit Contact"
+        tools:layout="@layout/fragment_edit_contact">
+        <argument
+            android:name="contact"
+            app:argType="com.noahgeren.trailangel.models.EmergencyContact" />
     </fragment>
 </navigation>

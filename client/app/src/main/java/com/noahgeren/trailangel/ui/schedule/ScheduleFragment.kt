@@ -74,7 +74,12 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
             this.hike = hike
             date.text = hike.startTime.format(dateFormatter)
             startTime.text = hike.startTime.format(timeFormatter)
-            duration.text = "${hike.startTime.until(hike.endTime, ChronoUnit.HOURS)} HR"
+            val hourDuration = hike.startTime.until(hike.endTime, ChronoUnit.HOURS)
+            if(hourDuration != 0L) {
+                duration.text = "${hourDuration} HR"
+            } else {
+                duration.text = "${hike.startTime.until(hike.endTime, ChronoUnit.MINUTES)} MINS"
+            }
             trailName.text = hike.trailName
             if(previous != null) {
                 if(previous.startTime.toLocalDate().isEqual(hike.startTime.toLocalDate())) {

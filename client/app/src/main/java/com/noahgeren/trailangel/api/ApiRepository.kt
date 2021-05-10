@@ -28,4 +28,10 @@ interface ApiRepository {
     @POST("/hike/save")
     fun saveHike(@Body hike: Hike, @Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<Hike>
 
+    @GET("/contact/all")
+    fun getContacts(@Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<List<EmergencyContact>>
+
+    @POST("/contact/save")
+    fun saveContact(@Body contact: EmergencyContact, @Header("Authorization") token: String = "Bearer " + PreferenceUtils.getToken()): Call<EmergencyContact>
+
 }

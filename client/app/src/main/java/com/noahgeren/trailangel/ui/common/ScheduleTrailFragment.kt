@@ -79,12 +79,6 @@ class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
             findNavController().navigate(R.id.navigation_schedule)
         }
 
-        updateUI()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun updateUI() {
-        // TODO: This is overriding changed values
         trailName.setText(hike.trailName)
         hike.latitude?.let {
             latitude.setText("" + it)
@@ -95,6 +89,11 @@ class ScheduleTrailFragment: Fragment(R.layout.fragment_schedule_trail) {
         hike.length?.let {
             length.setText("" + it)
         }
+        updateUI()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateUI() {
         hike.startTime.let {
             startTime.setText(it.format(formatter))
         }

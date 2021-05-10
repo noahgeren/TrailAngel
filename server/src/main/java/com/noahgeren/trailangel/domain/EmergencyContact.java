@@ -21,7 +21,6 @@ public class EmergencyContact {
 	
 	private String phoneNumber;
 	
-	@JsonIgnore
 	private String user;
 	
 }

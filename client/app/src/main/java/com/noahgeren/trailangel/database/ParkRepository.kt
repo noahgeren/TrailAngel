@@ -9,8 +9,6 @@ import com.noahgeren.trailangel.models.Park
 import java.lang.IllegalStateException
 import java.util.concurrent.Executors
 
-private const val DATABASE_NAME = "fuck-this-stupid-shit"
-
 class ParkRepository private constructor(context: Context){
 
     init {
@@ -22,7 +20,7 @@ class ParkRepository private constructor(context: Context){
     private var parksLoaded = false
 
     fun getParks(): LiveData<List<Park>> {
-        if(!parksLoaded) { // TODO: Add caching
+        if(!parksLoaded) {
             ApiService.getParks()
             parksLoaded = true
         }
